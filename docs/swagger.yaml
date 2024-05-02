@@ -1,0 +1,535 @@
+basePath: /
+definitions:
+  github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.CreatePharmacyRequest:
+    properties:
+      description:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+    required:
+    - description
+    - location
+    - name
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy:
+    properties:
+      createdAt:
+        type: string
+      descritpion:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - location
+    - name
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.UpdatePharmacyRequest:
+    properties:
+      description:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_product.CreateProductRequest:
+    properties:
+      brand_name:
+        type: string
+      dispence_mode:
+        type: string
+      dosage:
+        type: string
+      generic_name:
+        type: string
+      insurance_plan:
+        type: string
+      manufacturer_name:
+        type: string
+      package_size:
+        type: string
+      strength:
+        type: string
+    required:
+    - brand_name
+    - dispence_mode
+    - dosage
+    - generic_name
+    - insurance_plan
+    - manufacturer_name
+    - package_size
+    - strength
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_product.Product:
+    properties:
+      brand_name:
+        type: string
+      createdAt:
+        type: string
+      dispence_mode:
+        type: string
+      dosage:
+        type: string
+      generic_name:
+        type: string
+      id:
+        type: string
+      insurance_plan:
+        type: string
+      manufacturer_name:
+        type: string
+      package_size:
+        type: string
+      strength:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - brand_name
+    - dispence_mode
+    - dosage
+    - generic_name
+    - insurance_plan
+    - manufacturer_name
+    - package_size
+    - strength
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_product.UpdateProductRequest:
+    properties:
+      brand_name:
+        type: string
+      dispence_mode:
+        type: string
+      dosage:
+        type: string
+      generic_name:
+        type: string
+      insurance_plan:
+        type: string
+      manufacturer_name:
+        type: string
+      package_size:
+        type: string
+      strength:
+        type: string
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_user.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        minLength: 8
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_user.LoginUserRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_user.User:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - email
+    - name
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a service for ePharma project
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: ePharma API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: login user
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_user.LoginUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Login an user
+      tags:
+      - auth
+  /auth/logout:
+    get:
+      consumes:
+      - application/json
+      description: logout user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Logout user
+      tags:
+      - auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: refresh token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Refresh an access token
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: register user
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_user.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_user.User'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Register an user
+      tags:
+      - auth
+  /pharmacy:
+    get:
+      consumes:
+      - application/json
+      description: get all pharmacies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy'
+            type: array
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get all pharmacies
+      tags:
+      - pharmacy
+    post:
+      consumes:
+      - application/json
+      description: create pharmacy
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.CreatePharmacyRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Create a pharmacy
+      tags:
+      - pharmacy
+  /pharmacy/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete pharmacy
+      parameters:
+      - description: Pharmacy ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete a pharmacy
+      tags:
+      - pharmacy
+    get:
+      consumes:
+      - application/json
+      description: get pharmacy
+      parameters:
+      - description: Pharmacy ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get a pharmacy
+      tags:
+      - pharmacy
+    put:
+      consumes:
+      - application/json
+      description: update pharmacy
+      parameters:
+      - description: Pharmacy ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.UpdatePharmacyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Update a pharmacy
+      tags:
+      - pharmacy
+  /product:
+    get:
+      consumes:
+      - application/json
+      description: get products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.Product'
+            type: array
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get all products
+      tags:
+      - product
+    post:
+      consumes:
+      - application/json
+      description: create product
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.CreateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.Product'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Create a product
+      tags:
+      - product
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete a product
+      tags:
+      - product
+    get:
+      consumes:
+      - application/json
+      description: get product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.Product'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get a product
+      tags:
+      - product
+    put:
+      consumes:
+      - application/json
+      description: update product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.UpdateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_product.Product'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Update a product
+      tags:
+      - product
+swagger: "2.0"
