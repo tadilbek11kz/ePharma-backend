@@ -3,6 +3,7 @@ package connections
 import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/config"
 
+	inventory "github.com/tadilbek11kz/ePharma-backend/pkg/inventory"
 	pharmacy "github.com/tadilbek11kz/ePharma-backend/pkg/pharmacy"
 	product "github.com/tadilbek11kz/ePharma-backend/pkg/product"
 	user "github.com/tadilbek11kz/ePharma-backend/pkg/user"
@@ -54,6 +55,7 @@ func connectPostgres(connectUrl string) (*gorm.DB, error) {
 		&user.User{},
 		&pharmacy.Pharmacy{},
 		&product.Product{},
+		&inventory.Inventory{},
 	)
 
 	runMigrations(db)

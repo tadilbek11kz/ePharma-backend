@@ -11,6 +11,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/appserver"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/config"
 	authHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/auth"
+	inventoryHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/inventory"
 	pharmacyHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/pharmacy"
 	productHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/product"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/swagger"
@@ -18,6 +19,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/connections"
 	"github.com/tadilbek11kz/ePharma-backend/internal/middleware"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/auth"
+	"github.com/tadilbek11kz/ePharma-backend/internal/service/inventory"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/pharmacy"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/product"
 	logrus_log "github.com/tadilbek11kz/ePharma-backend/internal/util/logger/logrus-log"
@@ -30,7 +32,7 @@ import (
 // @termsOfService http://swagger.io/terms/
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8080
+// @host 10.225.78.198:8080
 // @BasePath /
 func main() {
 	ex, err := os.Executable()
@@ -64,6 +66,8 @@ func main() {
 			pharmacyHandler.New,
 			product.New,
 			productHandler.New,
+			inventory.New,
+			inventoryHandler.New,
 			swagger.New,
 		),
 
