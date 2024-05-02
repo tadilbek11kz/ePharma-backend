@@ -45,6 +45,32 @@ definitions:
       quantity:
         type: integer
     type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_notification.CreateNotificationRequest:
+    properties:
+      email:
+        type: string
+      product_id:
+        type: string
+    required:
+    - email
+    - product_id
+    type: object
+  github_com_tadilbek11kz_ePharma-backend_pkg_notification.Notification:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      product_id:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - email
+    - product_id
+    type: object
   github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.CreatePharmacyRequest:
     properties:
       description:
@@ -444,6 +470,59 @@ paths:
       summary: Update inventory
       tags:
       - inventory
+  /notification:
+    post:
+      consumes:
+      - application/json
+      description: Create notification
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_notification.CreateNotificationRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_notification.Notification'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Create notification
+      tags:
+      - notification
+  /notification/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete notification
+      parameters:
+      - description: Notification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete notification
+      tags:
+      - notification
   /pharmacy:
     get:
       consumes:

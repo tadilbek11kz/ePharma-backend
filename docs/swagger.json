@@ -356,6 +356,87 @@
                 }
             }
         },
+        "/notification": {
+            "post": {
+                "description": "Create notification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notification"
+                ],
+                "summary": "Create notification",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_notification.CreateNotificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_notification.Notification"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/notification/{id}": {
+            "delete": {
+                "description": "Delete notification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notification"
+                ],
+                "summary": "Delete notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/pharmacy": {
             "get": {
                 "description": "get all pharmacies",
@@ -823,6 +904,45 @@
                 },
                 "quantity": {
                     "type": "integer"
+                }
+            }
+        },
+        "github_com_tadilbek11kz_ePharma-backend_pkg_notification.CreateNotificationRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "product_id"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_tadilbek11kz_ePharma-backend_pkg_notification.Notification": {
+            "type": "object",
+            "required": [
+                "email",
+                "product_id"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
                 }
             }
         },

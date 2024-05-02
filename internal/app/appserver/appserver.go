@@ -9,6 +9,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/config"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/auth"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/inventory"
+	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/notification"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/pharmacy"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/product"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/swagger"
@@ -30,6 +31,7 @@ func RegisterHooks(
 	pharmacyHandler *pharmacy.Handler,
 	productHandler *product.Handler,
 	inventoryHandler *inventory.Handler,
+	notificationHandler *notification.Handler,
 	swaggerHandler *swagger.Handler,
 ) {
 	lifecycle.Append(
@@ -42,6 +44,7 @@ func RegisterHooks(
 				pharmacy.RegisterRoutes(router, pharmacyHandler)
 				product.RegisterRoutes(router, productHandler)
 				inventory.RegisterRoutes(router, inventoryHandler)
+				notification.RegisterRoutes(router, notificationHandler)
 				swagger.RegisterRoutes(router, swaggerHandler)
 
 				go func() {

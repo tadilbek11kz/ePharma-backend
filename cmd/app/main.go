@@ -12,6 +12,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/config"
 	authHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/auth"
 	inventoryHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/inventory"
+	notificationHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/notification"
 	pharmacyHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/pharmacy"
 	productHandler "github.com/tadilbek11kz/ePharma-backend/internal/app/handler/product"
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/handler/swagger"
@@ -20,6 +21,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/middleware"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/auth"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/inventory"
+	"github.com/tadilbek11kz/ePharma-backend/internal/service/notification"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/pharmacy"
 	"github.com/tadilbek11kz/ePharma-backend/internal/service/product"
 	logrus_log "github.com/tadilbek11kz/ePharma-backend/internal/util/logger/logrus-log"
@@ -68,6 +70,8 @@ func main() {
 			productHandler.New,
 			inventory.New,
 			inventoryHandler.New,
+			notification.New,
+			notificationHandler.New,
 			swagger.New,
 		),
 
