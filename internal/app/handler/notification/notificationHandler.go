@@ -24,7 +24,7 @@ func New(service notificationService.Service, middleware *middleware.JWTMiddlewa
 
 func RegisterRoutes(router *gin.Engine, handler *Handler) {
 	notificationRouter := router.Group("/notification")
-	notificationRouter.Use(handler.middleware.New())
+	// notificationRouter.Use(handler.middleware.New())
 	notificationRouter.POST("/", handler.createNotification)
 	notificationRouter.DELETE("/:id", handler.deleteNotification)
 }

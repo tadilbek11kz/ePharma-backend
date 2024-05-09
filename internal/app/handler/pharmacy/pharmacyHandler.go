@@ -24,7 +24,7 @@ func New(service pharmacyService.Service, middleware *middleware.JWTMiddleware) 
 
 func RegisterRoutes(router *gin.Engine, handler *Handler) {
 	pharmacyRouter := router.Group("/pharmacy")
-	pharmacyRouter.Use(handler.middleware.New())
+	// pharmacyRouter.Use(handler.middleware.New())
 	pharmacyRouter.POST("/", handler.createPharmacy)
 	pharmacyRouter.GET("/", handler.getAllPharmacies)
 	pharmacyRouter.GET("/:id", handler.getPharmacy)

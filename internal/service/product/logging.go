@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
+	pharmacyModel "github.com/tadilbek11kz/ePharma-backend/pkg/pharmacy"
 	model "github.com/tadilbek11kz/ePharma-backend/pkg/product"
 )
 
@@ -122,5 +123,26 @@ func (m *middlewareLogging) DeleteProduct(ctx context.Context, id string) (err e
 	}(time.Now())
 
 	err = m.next.DeleteProduct(ctx, id)
+	return
+}
+
+func (m *middlewareLogging) GetProductAvailability(ctx context.Context, id string) (pharmacies []pharmacyModel.GetPharmacyAvailabilityRequest, err error) {
+	logrus.WithContext(ctx).WithFields(logrus.Fields{
+		"method": "getProductAvailability",
+		"msg":    "Get product inventory",
+		"logger": "middlewareProductService",
+	}).Info()
+
+	defer func(begin time.Time) {
+		logrus.WithContext(ctx).WithFields(logrus.Fields{
+			"method":        "getProductAvailability",
+			"msg":           "Get product inventory",
+			"logger":        "middlewareProductService",
+			"responseError": err,
+			"elapsedTime":   time.Since(begin),
+		}).Info()
+	}(time.Now())
+
+	pharmacies, err = m.next.GetProductAvailability(ctx, id)
 	return
 }

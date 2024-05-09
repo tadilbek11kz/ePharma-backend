@@ -14,4 +14,5 @@ type Product struct {
 	InsurancePlan    string `gorm:"size:255;not null;" validate:"required" json:"insurance_plan"`
 	PackageSize      string `gorm:"size:255;not null;" validate:"required" json:"package_size"`
 	ManufacturerName string `gorm:"size:255;not null;" validate:"required" json:"manufacturer_name"`
+	Image            string `gorm:"size:255;not null;" validate:"required" json:"image"`
 }

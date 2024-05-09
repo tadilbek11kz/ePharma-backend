@@ -9,4 +9,5 @@ type UpdateProductRequest struct {
 	InsurancePlan    string `json:"insurance_plan"`
 	PackageSize      string `json:"package_size"`
 	ManufacturerName string `json:"manufacturer_name"`
+	Image            string `json:"image"`
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/tadilbek11kz/ePharma-backend/internal/middleware"
 	productService "github.com/tadilbek11kz/ePharma-backend/internal/service/product"
 	"github.com/tadilbek11kz/ePharma-backend/internal/util"
+	pharmacyModel "github.com/tadilbek11kz/ePharma-backend/pkg/pharmacy"
 	"github.com/tadilbek11kz/ePharma-backend/pkg/product"
 )
 
@@ -24,10 +25,11 @@ func New(service productService.Service, middleware *middleware.JWTMiddleware) *
 
 func RegisterRoutes(router *gin.Engine, handler *Handler) {
 	productRouter := router.Group("/product")
-	productRouter.Use(handler.middleware.New())
+	// productRouter.Use(handler.middleware.New())
 	productRouter.POST("/", handler.createProduct)
 	productRouter.GET("/", handler.getAllProducts)
 	productRouter.GET("/:id", handler.getProduct)
+	productRouter.GET("/:id/inventory", handler.getProductAvailability)
 	productRouter.PUT("/:id", handler.updateProduct)
 	productRouter.DELETE("/:id", handler.deleteProduct)
 }
@@ -161,4 +163,29 @@ func (h *Handler) deleteProduct(c *gin.Context) {
 	}
 
 	util.Respond(c, http.StatusNoContent, nil)
+}
+
+// getProductAvailability godoc
+// @Summary      Get product inventory
+// @Description  get product inventory
+// @Tags         product
+// @Accept       json
+// @Produce      json
+// @Param        id     path    string     true        "Product ID"
+// @Success      200 {object} []pharmacyModel.Pharmacy
+// @Failure      400
+// @Failure      404
+// @Failure      500
+// @Router       /product/{id}/inventory [get]
+func (h *Handler) getProductAvailability(c *gin.Context) {
+	id := c.Param("id")
+	var pharmacies []pharmacyModel.GetPharmacyAvailabilityRequest
+
+	pharmacies, err := h.Service.GetProductAvailability(c.Request.Context(), id)
+	if err != nil {
+		util.Respond(c, http.StatusInternalServerError, gin.H{"status": "fail", "message": "Failed to get product inventory: " + err.Error()})
+		return
+	}
+
+	util.Respond(c, http.StatusOK, pharmacies)
 }

@@ -31,7 +31,7 @@ func (p *Repository) GetAllPharmacies() (pharmacies []model.Pharmacy, err error)
 }
 
 func (p *Repository) GetPharmacy(id string) (pharmacy model.Pharmacy, err error) {
-	err = p.db.First(&pharmacy, id).Error
+	err = p.db.First(&pharmacy, "id = ?", id).Error
 	return
 }
 

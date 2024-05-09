@@ -24,12 +24,12 @@ func New(service inventoryService.Service, middleware *middleware.JWTMiddleware)
 
 func RegisterRoutes(router *gin.Engine, handler *Handler) {
 	inventoryRouter := router.Group("/inventory")
-	inventoryRouter.Use(handler.middleware.New())
+	// inventoryRouter.Use(handler.middleware.New())
 	inventoryRouter.POST("/", handler.createInventory)
 	inventoryRouter.GET("/", handler.getAllInventories)
-	// inventoryRouter.GET("/:id", handler.getInventory)
-	// inventoryRouter.PUT("/:id", handler.updateInventory)
-	// inventoryRouter.DELETE("/:id", handler.deleteInventory)
+	inventoryRouter.GET("/:id", handler.getInventory)
+	inventoryRouter.PUT("/:id", handler.updateInventory)
+	inventoryRouter.DELETE("/:id", handler.deleteInventory)
 }
 
 // createInventory godoc

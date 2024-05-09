@@ -838,6 +838,50 @@
                     }
                 }
             }
+        },
+        "/product/{id}/inventory": {
+            "get": {
+                "description": "get product inventory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Get product inventory",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1013,6 +1057,7 @@
                 "dispence_mode",
                 "dosage",
                 "generic_name",
+                "image",
                 "insurance_plan",
                 "manufacturer_name",
                 "package_size",
@@ -1029,6 +1074,9 @@
                     "type": "string"
                 },
                 "generic_name": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {
@@ -1052,6 +1100,7 @@
                 "dispence_mode",
                 "dosage",
                 "generic_name",
+                "image",
                 "insurance_plan",
                 "manufacturer_name",
                 "package_size",
@@ -1074,6 +1123,9 @@
                     "type": "string"
                 },
                 "id": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {
@@ -1106,6 +1158,9 @@
                     "type": "string"
                 },
                 "generic_name": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {

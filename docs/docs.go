@@ -844,6 +844,50 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/product/{id}/inventory": {
+            "get": {
+                "description": "get product inventory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Get product inventory",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/github_com_tadilbek11kz_ePharma-backend_pkg_pharmacy.Pharmacy"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1019,6 +1063,7 @@ const docTemplate = `{
                 "dispence_mode",
                 "dosage",
                 "generic_name",
+                "image",
                 "insurance_plan",
                 "manufacturer_name",
                 "package_size",
@@ -1035,6 +1080,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "generic_name": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {
@@ -1058,6 +1106,7 @@ const docTemplate = `{
                 "dispence_mode",
                 "dosage",
                 "generic_name",
+                "image",
                 "insurance_plan",
                 "manufacturer_name",
                 "package_size",
@@ -1080,6 +1129,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {
@@ -1112,6 +1164,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "generic_name": {
+                    "type": "string"
+                },
+                "image": {
                     "type": "string"
                 },
                 "insurance_plan": {

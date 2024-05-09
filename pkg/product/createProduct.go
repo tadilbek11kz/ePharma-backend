@@ -9,4 +9,5 @@ type CreateProductRequest struct {
 	InsurancePlan    string `json:"insurance_plan" binding:"required"`
 	PackageSize      string `json:"package_size" binding:"required"`
 	ManufacturerName string `json:"manufacturer_name" binding:"required"`
+	Image            string `json:"image" binding:"required"`
 }

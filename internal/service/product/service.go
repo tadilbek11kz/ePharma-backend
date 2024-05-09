@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/tadilbek11kz/ePharma-backend/internal/app/store"
+	pharmacyModel "github.com/tadilbek11kz/ePharma-backend/pkg/pharmacy"
 	model "github.com/tadilbek11kz/ePharma-backend/pkg/product"
 )
 
@@ -12,6 +13,7 @@ type Service interface {
 	CreateProduct(ctx context.Context, req model.CreateProductRequest) (product model.Product, err error)
 	GetAllProducts(ctx context.Context) (products []model.Product, err error)
 	GetProduct(ctx context.Context, id string) (product model.Product, err error)
+	GetProductAvailability(ctx context.Context, id string) (pharmacies []pharmacyModel.GetPharmacyAvailabilityRequest, err error)
 	UpdateProduct(ctx context.Context, id string, req model.UpdateProductRequest) (product model.Product, err error)
 	DeleteProduct(ctx context.Context, id string) (err error)
 }
@@ -46,4 +48,8 @@ func (s *service) UpdateProduct(ctx context.Context, id string, req model.Update
 
 func (s *service) DeleteProduct(ctx context.Context, id string) (err error) {
 	return s.st.ProductRepository.DeleteProduct(id)
+}
+
+func (s *service) GetProductAvailability(ctx context.Context, id string) (pharmacies []pharmacyModel.GetPharmacyAvailabilityRequest, err error) {
+	return s.st.ProductRepository.GetProductAvailability(id)
 }
